@@ -14,35 +14,11 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css"
         integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 
-    <style>
-        body {
-            background-color: #EEEEEE;
-        }
+    <link rel="stylesheet" href="style.css">
 
-        .weahterform {
-            background-color: #FFF;
-            padding: 20px 20px 10px 20px;
-            margin-top: 30px;
-        }
-
-        .weahterform h1 {
-            margin: 0;
-            padding-bottom: 20px;
-            text-align: center;
-        }
-
-        .form-control {
-            border-radius: 0;
-        }
-
-        #paw-results-row {
-            display: none;
-        }
-
-        .paw-form-element {
-            margin-top: 10px;
-        }
-    </style>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-
+    fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr"
+    crossorigin="anonymous">
     
 </head>
 
@@ -57,14 +33,20 @@
                 <input id="paw-form-lat" type="text" class="form-control paw-form-element" placeholder="41.1579">
                 <label for="paw-form-lon">Longitude</label>
                 <input id="paw-form-lon" type="text" class="form-control paw-form-element" placeholder="-8.6291">
-                <button id="paw-form-searchWeather" class="btn btn-success paw-form-element"
-                    onclick="searchWeather()">Search</button>
+
+                <button id="paw-form-searchWeather" class="btn btn-success paw-form-element" onclick="searchWeather()">Search</button>
+                <button type="button" id="obterLocalizacao">Obter Localização</button>
             </div>
             <hr>
             <div id="paw-results-row" class="col-md-12">
                 <div class="weahterform">
                     <h1>Weather Results</h1>
                     <p id="Results"></p>
+                </div>
+
+                <div class="airPollution">
+                    <h1>Air Pollution Results</h1>
+                    <p id="ResultAirPollution"></p>
                 </div>
             </div>
         </div>
@@ -83,27 +65,7 @@
         crossorigin="anonymous"></script>
 
     <!-- user javascript -->
-    <script>
-        const openweathermaps_key = "YOUR_KEY_HERE"
-
-        function searchWeather(lat, long) {
-            var lat = document.getElementById('paw-form-lat').value;
-            var lon = document.getElementById('paw-form-lon').value;
-            var xhttp = new XMLHttpRequest();
-            xhttp.onreadystatechange = function () {
-                if (this.readyState == 4 && this.status == 200) {
-                    var weatherObject = JSON.parse(xhttp.response);
-                    var currentWeather = weatherObject["weather"][0]["description"];
-                    document.getElementById("paw-results-row").style.display = "block";
-                    document.getElementById("Results").innerHTML = currentWeather;
-                }
-            }
-
-            xhttp.open("GET", `http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&APPID=${openweathermaps_key}`, true);
-            xhttp.setRequestHeader('Accept', 'application/json');
-            xhttp.send();
-        }
-    </script>
+    <script src="script.js"></script>
 
     </body>
 
